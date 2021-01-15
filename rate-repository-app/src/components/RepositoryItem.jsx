@@ -3,6 +3,13 @@ import { View, StyleSheet, Image } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
 
+const border = StyleSheet.create({
+    container: {
+        padding: 5,
+        borderWidth: 2,
+    }
+});
+
 const headerStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -39,7 +46,7 @@ const footerStyle = StyleSheet.create({
       flexDirection: 'row',
       flexGrow: 1,
       justifyContent: 'space-around',
-      marginLeft: 60,
+      marginLeft: 45,
     },
 });
 
@@ -66,7 +73,7 @@ const RepositoryBody = ({ repository }) => {
 };
 
 const numberParser = (number) => {
-    if (number > 1000) {
+    if (number >= 1000) {
         return (number / 1000).toFixed(1) + "K";       
     } 
     return number;
@@ -109,7 +116,7 @@ const RepositoryFooter = ({ repository }) => {
 
 const RepositoryItem = ({ repository }) => {
     return (
-        <View>
+        <View style={border.container}>
             <RepositoryHeader repository={repository} />
             <RepositoryBody repository={repository} />
             <RepositoryFooter repository={repository} />
