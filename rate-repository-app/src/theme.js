@@ -9,7 +9,8 @@ const theme = {
       primary: '#0366d6',
     },
     backgroundColors: {
-      background: '#24292e',
+      AppBar: '#24292e',
+      LanguageBox: "#61dafb"
     },
     fontSizes: {
       body: 14,

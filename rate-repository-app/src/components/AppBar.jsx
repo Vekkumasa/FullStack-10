@@ -3,12 +3,13 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
 import { ItemSeparator } from '../theme';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     paddingBottom: 20,
-    backgroundColor: '#24292e',
+    backgroundColor: theme.backgroundColors.AppBar
 
     // ...
   },
