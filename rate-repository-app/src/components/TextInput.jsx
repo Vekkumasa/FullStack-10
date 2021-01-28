@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput as NativeTextInput, StyleSheet, View } from 'react-native';
+import { TextInput as NativeTextInput, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   errorBorder: {
