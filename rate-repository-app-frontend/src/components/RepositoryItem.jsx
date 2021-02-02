@@ -51,6 +51,7 @@ const footerStyle = StyleSheet.create({
 });
 
 const RepositoryHeader = ({ repository }) => {
+    
     return (
         <View key={repository.id} style={headerStyle.container}>
             <View style={headerStyle.avatarContainer}>
