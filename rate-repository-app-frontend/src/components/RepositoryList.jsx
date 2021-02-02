@@ -10,14 +10,14 @@ const RepositoryList = () => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
-
-    return (
-      <FlatList
-        data={repositoryNodes}
-          ItemSeparatorComponent={ItemSeparator}
-          renderItem={({ index }) => <RepositoryItem repository={repositoryNodes[index]}/> }
-          />
-    );
+    
+  return (
+    <FlatList
+      data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={({ index }) => <RepositoryItem repository={repositoryNodes[index]}/> }
+        />
+  );
 };
 
 export default RepositoryList;

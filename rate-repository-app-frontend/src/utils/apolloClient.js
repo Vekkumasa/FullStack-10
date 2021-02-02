@@ -1,8 +1,8 @@
 import ApolloClient from 'apollo-boost';
 
-const createApolloClient = () => {
+const createApolloClient = (uri) => {
   return new ApolloClient({
-    uri: 'http://192.168.100.17:5000/graphql',
+    uri: uri,
   });
 };
 
