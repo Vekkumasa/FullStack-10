@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
@@ -63,13 +64,14 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const history = useHistory();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
 
     try {
-      const { data } = await signIn({ username, password });
-      console.log('data', data);
+      await signIn({ username, password });
+      history.push("/");
     } catch (e) {
       console.log(e);
     }

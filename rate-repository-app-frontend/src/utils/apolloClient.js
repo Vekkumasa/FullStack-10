@@ -1,7 +1,20 @@
 import ApolloClient from 'apollo-boost';
 
-const createApolloClient = (uri) => {
+const createApolloClient = (uri, authStorage) => {
   return new ApolloClient({
+    request: async (operation) => {
+      try {
+        const accessToken = await authStorage.getAccessToken();
+        operation.setContext({
+          headers: {
+            authorization: accessToken ? `Bearer ${accessToken}` : ""
+          }
+        });
+        console.log('Apolloclient accesstoken:', accessToken ? accessToken : "no accessToken");
+      } catch (e) {
+        console.log(e);
+      }
+    },
     uri: uri,
   });
 };
