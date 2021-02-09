@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
@@ -50,40 +49,42 @@ const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
       <View>
-        <FormikTextInput name="username" placeholder="Username" style={styles.field}/>
+        <FormikTextInput testID="username" name="username" placeholder="Username" style={styles.field}/>
       </View>
       <View >
-        <FormikTextInput name="password" placeholder="Password" secureTextEntry={true} style={styles.field} />
+        <FormikTextInput testID="password" name="password" placeholder="Password" secureTextEntry={true} style={styles.field} />
       </View>
-      <TouchableWithoutFeedback onPress={onSubmit}  >
+      <TouchableWithoutFeedback onPress={onSubmit} testID="submit" >
         <Text style={styles.button}>Sign in</Text>
       </TouchableWithoutFeedback>
     </View>
   );
 };
 
+export const SignInFormContainer = ({ handleSubmit }) => {
+  return (
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
+  );
+};
+
 const SignIn = () => {
   const [signIn] = useSignIn();
-  const history = useHistory();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
 
     try {
-      await signIn({ username, password });
-      history.push("/");
+      const { data } = await signIn({ username, password });
+      console.log('data', data);
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
-    <Formik 
-    initialValues={initialValues} 
-    onSubmit={onSubmit}
-    validationSchema={validationSchema}>
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
+    <SignInFormContainer handleSubmit={onSubmit} />
   );
 };
 export default SignIn; 

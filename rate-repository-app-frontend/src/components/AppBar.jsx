@@ -6,7 +6,6 @@ import theme from '../theme';
 import { GET_USER } from '../graphql/queries/';
 import { useQuery, useApolloClient } from '@apollo/client';
 import AuthStorageContext from '../contexts/AuthStorageContext';
-import { useHistory } from "react-router-dom";
 
 const styles = StyleSheet.create({
   container: {

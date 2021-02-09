@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
+import { GET_REPOSITORY } from '../graphql/queries';
+import { useQuery } from '@apollo/client';
+import * as Linking from 'expo-linking';
 
 const border = StyleSheet.create({
     container: {
@@ -47,19 +50,36 @@ const footerStyle = StyleSheet.create({
       flexGrow: 1,
       justifyContent: 'space-around',
       marginLeft: 45,
+      marginBottom: 10,
     },
 });
 
+const linkToGitHub = StyleSheet.create({
+    container: {
+        padding: 5,
+        width: 250,
+        borderWidth: 2,
+        borderRadius: 15,
+        backgroundColor: theme.backgroundColors.LanguageBox,
+        marginLeft: 50
+      },
+      title: {
+        textAlign: "center",
+        fontSize: 15,
+        fontWeight: "bold"
+      }
+})
+
 const RepositoryHeader = ({ repository }) => {
-    
+
     return (
         <View key={repository.id} style={headerStyle.container}>
             <View style={headerStyle.avatarContainer}>
                 <Image style={headerStyle.avatar} source = {{uri:`${repository.ownerAvatarUrl}`}} />
             </View>
             <View style={headerStyle.infoContainer}>
-                <Text color="textSecondary" fontWeight="bold" fontSize="heading"> { repository.fullName } </Text>
-                <Text color="primary"> { repository.description } </Text>
+                <Text testID="fullName" color="textSecondary" fontWeight="bold" fontSize="heading"> { repository.fullName } </Text>
+                <Text testID="description" color="primary"> { repository.description } </Text>
             </View>
         </View>
     );
@@ -68,7 +88,7 @@ const RepositoryHeader = ({ repository }) => {
 const RepositoryBody = ({ repository }) => {
     return (
         <View style={bodyStyle.container}>
-            <Text color="textSecondary" fontWeight="bold" style={bodyStyle.background}> {repository.language} </Text>
+            <Text testID="language" color="textSecondary" fontWeight="bold" style={bodyStyle.background}> {repository.language} </Text>
         </View>
     );
 };
@@ -106,7 +126,7 @@ const RepositoryFooter = ({ repository }) => {
                 <Text> Avg </Text>
             </View>
             <View>
-                <Text color="textSecondary" fontWeight="bold">
+                <Text testID="review" color="textSecondary" fontWeight="bold">
                     {reviews}
                 </Text>
                 <Text> Reviews </Text>
@@ -115,12 +135,38 @@ const RepositoryFooter = ({ repository }) => {
     );
 };
 
-const RepositoryItem = ({ repository }) => {
+const LinkToGitHub = ({ repository, clicked }) => {
+    if (!clicked) {
+        return (
+            <Text></Text>
+        )
+    }
+    
+    const onPress = () => {
+        Linking.openURL(repository.url);
+    }
+
+    return(
+        <View style={linkToGitHub.container}>
+            <TouchableOpacity onPress={() => onPress()}>
+                <Text style={linkToGitHub.title}>Link to GitHub</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+const RepositoryItem = ({ repository, clicked }) => {
+    
+    const repo = useQuery(GET_REPOSITORY, {
+        variables: {id: repository.id}
+    });
+
     return (
-        <View style={border.container}>
+        <View style={border.container} testID={repository.id}>
             <RepositoryHeader repository={repository} />
             <RepositoryBody repository={repository} />
             <RepositoryFooter repository={repository} />
+            <LinkToGitHub repository={repository} clicked={clicked} />
         </View>
     );
 };
