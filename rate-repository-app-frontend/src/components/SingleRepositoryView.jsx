@@ -10,6 +10,7 @@ import { ItemSeparator } from '../theme';
 const SingleRepository = () => {
     const { id } = useParams();
     const { data } = useQuery(GET_REPOSITORY, {
+        fetchPolicy: 'cache-and-network',
         variables: { id: id } 
     })
 

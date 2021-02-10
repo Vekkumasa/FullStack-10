@@ -10,6 +10,7 @@ const createApolloClient = (uri, authStorage) => {
             authorization: accessToken ? `Bearer ${accessToken}` : ""
           }
         });
+        console.log('Apolloclient accesstoken:', accessToken ? accessToken : "no accessToken");
       } catch (e) {
         console.log(e);
       }

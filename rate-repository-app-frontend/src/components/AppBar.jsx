@@ -33,6 +33,11 @@ const tabs = [
       id: "3",
       name: "Log Out",
       link: "/"
+    },
+    {
+      id: "4",
+      name: "Create Review",
+      link: "/CreateReview"
     }
 ];
 
@@ -46,7 +51,10 @@ const LogOut = () => {
   };
 
   return (
-    <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" onClick={onClick} tab={tabs[2]}/>
+    <ScrollView horizontal>
+      <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[3]}/>
+      <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" onClick={onClick} tab={tabs[2]}/>
+    </ScrollView>
   );
 };
 
@@ -57,7 +65,9 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[0]}/>
         {user.data?.authorizedUser ?
-          <LogOut/> :
+          <LogOut/> 
+          
+          :
           <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[1]}/> 
         } 
       </ScrollView>
