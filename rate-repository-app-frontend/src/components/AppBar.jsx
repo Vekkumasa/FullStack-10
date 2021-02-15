@@ -38,6 +38,11 @@ const tabs = [
       id: "4",
       name: "Create Review",
       link: "/CreateReview"
+    },
+    {
+      id: "5",
+      name: "Sign Up",
+      link: "/SignUp"
     }
 ];
 
@@ -65,11 +70,15 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[0]}/>
         {user.data?.authorizedUser ?
-          <LogOut/> 
-          
+          <LogOut/>           
           :
           <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[1]}/> 
-        } 
+        }
+        {user.data?.authorizedUser ?
+          <View></View>
+          :
+          <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[4]}/> 
+        }
       </ScrollView>
     </View>
   );
