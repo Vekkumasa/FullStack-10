@@ -43,6 +43,11 @@ const tabs = [
       id: "5",
       name: "Sign Up",
       link: "/SignUp"
+    },
+    {
+      id: "6",
+      name: "My reviews",
+      link: "/MyReviews"
     }
 ];
 
@@ -75,7 +80,10 @@ const AppBar = ({ visible, setVisible }) => {
       <ScrollView horizontal>
         <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[0]}/>
         {user.data?.authorizedUser ?
-          <LogOut/>           
+          <>
+            <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[5]}/>
+            <LogOut/>           
+          </>
           :
           <AppBarTab color="textHeading" fontSize="body" fontWeight="bold" padding="padding" tab={tabs[1]}/> 
         }

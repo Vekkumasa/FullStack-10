@@ -6,7 +6,7 @@ import Text from './Text';
 import theme from '../theme';
 import * as yup from 'yup';
 import { useHistory } from "react-router-dom";
-import useCreateReview from '../utils/useCreateReview';
+import useCreateReview from '../hooks/useCreateReview';
 
 const styles = StyleSheet.create({
     container: {

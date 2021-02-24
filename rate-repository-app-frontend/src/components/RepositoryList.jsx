@@ -107,10 +107,11 @@ const RepositoryList = () => {
   const [ search, setSearch ] = useState('');
   const [ searchKeyword ] = useDebounce(search, 1000);
 
-  const { repositories } = useRepositories({ ...query, searchKeyword });
+  const { repositories, fetchMore } = useRepositories({ ...query, searchKeyword, first: 5 });
 
   const onEndReach = () => {
-    console.log('You have reached the end of the list');
+    fetchMore();
+    console.log('Repository list Loppuun meni')
   };
 
   return (
