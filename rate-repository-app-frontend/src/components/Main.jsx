@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Constants from 'expo-constants';
 import { StyleSheet, View } from 'react-native';
 import { Route, Switch, Redirect } from 'react-router-native';
@@ -18,9 +18,12 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+
+    const [ visible, setVisible ] = useState(false);
+
     return (
         <View style={styles.container}>
-            <AppBar />
+            <AppBar visible={visible} setVisible={setVisible} />
             <Switch>
                 <Route path="/repository/:id" exact>
                     <SingleRepository />    
@@ -29,7 +32,7 @@ const Main = () => {
                     <CreateReview />
                 </Route>
                 <Route path="/" exact>
-                    <RepositoryList />
+                    <RepositoryList visible={visible} setVisible={setVisible} />
                 </Route>
                 <Route path="/SignIn" exact>
                     <SignIn />

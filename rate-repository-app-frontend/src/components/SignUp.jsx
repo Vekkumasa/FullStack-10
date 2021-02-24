@@ -108,17 +108,16 @@ const SignUp = () => {
         const { username, password, confirmation } = values;
         
         try {
-            const { data } = await signUp({ username, password });
-            console.log('data', data);            
+          await signUp({ username, password });
+        
         } catch (e) {
-            console.log(e)
+
         }
 
         try {
-            const { data } = await signIn({ username, password });
+            await signIn({ username, password });
             history.push("/");
         } catch (e) {
-            console.log(e);
         }
     }
     return (

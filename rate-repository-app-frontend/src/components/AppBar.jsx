@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView  } from 'react-native';
 import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
 import theme from '../theme';
-import { GET_USER } from '../graphql/queries/';
+import { GET_USER } from '../graphql/queries';
 import { useQuery, useApolloClient } from '@apollo/client';
 import AuthStorageContext from '../contexts/AuthStorageContext';
 
@@ -63,8 +63,13 @@ const LogOut = () => {
   );
 };
 
-const AppBar = () => {
+const AppBar = ({ visible, setVisible }) => {
   const user = useQuery(GET_USER);
+
+  const openMenu = () => {
+    setVisible(!visible);
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal>

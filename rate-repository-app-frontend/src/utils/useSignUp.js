@@ -5,9 +5,9 @@ const useSignUp = () => {
     const [mutate, result] = useMutation(SIGN_UP);
 
     const signUp = async ( credentials ) => {
-      console.log('use signup credentials: ', credentials);
+
         const { data }  = await mutate({ variables: { credentials } });
-      console.log('use signup data', data);
+
         return data;
       };
       

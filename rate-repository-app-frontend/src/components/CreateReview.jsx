@@ -90,11 +90,10 @@ const CreateReview = () => {
                 text: review
             });
         
-            console.log('id', data.createReview.repositoryId)
             history.push(`/repository/${data.createReview.repositoryId}`)
 
         } catch (e) {
-            console.log(e);
+
         }
     }
 

@@ -78,12 +78,11 @@ const SignIn = () => {
     const { username, password } = values;
 
     try {
-      const { data } = await signIn({ username, password });
-      console.log('data', data);
+      await signIn({ username, password });
       history.push("/");
 
     } catch (e) {
-      console.log(e);
+      
     }
   };
 
